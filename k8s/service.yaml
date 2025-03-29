@@ -1,0 +1,14 @@
+# dotnet-api-repo/k8s/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-api-service # This name is used in Krakend config
+  namespace: dotnet-app
+spec:
+  selector:
+    app: dotnet-api
+  ports:
+  - protocol: TCP
+    port: 8080 # Service port (internal cluster access)
+    targetPort: 8080 # Port on the pod/container
+  type: ClusterIP # Only needs to be accessible within the cluster (by Krakend)

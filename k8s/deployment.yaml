@@ -1,0 +1,27 @@
+# dotnet-api-repo/k8s/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-api-deployment
+  namespace: dotnet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-api
+  template:
+    metadata:
+      labels:
+        app: dotnet-api
+    spec:
+      containers:
+      - name: dotnet-api
+        # IMPORTANT: Replace with your GHCR image path
+        # Use a placeholder that CI/ArgoCD can update, or use a stable tag like :main
+        image: ghcr.io/your-github-username/dotnet-api-repo:latest # Placeholder or stable tag
+        ports:
+        - containerPort: 8080 # Must match ASPNETCORE_URLS and Dockerfile EXPOSE
+        # Add environment variables, secrets, configmaps if needed
+        # env:
+        # - name: MY_SETTING
+        #   value: "some_value"
