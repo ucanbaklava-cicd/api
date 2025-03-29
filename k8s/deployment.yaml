@@ -25,3 +25,22 @@ spec:
         # env:
         # - name: MY_SETTING
         #   value: "some_value"
+
+        readinessProbe:
+          httpGet:
+            path: /api/health  # Your health check endpoint
+            port: 8080         # The container port
+          initialDelaySeconds: 15 # Wait 15s after container starts before first probe
+          periodSeconds: 10     # Probe every 10s
+          timeoutSeconds: 5      # Wait max 5s for response
+          failureThreshold: 3    # Mark as Unready after 3 consecutive failures
+          successThreshold: 1    # Mark as Ready after 1 successful probe (following failure)
+
+        livenessProbe:
+          httpGet:
+            path: /api/health  # Your health check endpoint
+            port: 8080         # The container port
+          initialDelaySeconds: 30 # Wait longer before starting liveness checks
+          periodSeconds: 20     # Probe less frequently than readiness
+          timeoutSeconds: 5
+          failureThreshold: 3    # Restart container after 3 consecutive failures
