@@ -18,7 +18,7 @@ spec:
       - name: dotnet-api
         # IMPORTANT: Replace with your GHCR image path
         # Use a placeholder that CI/ArgoCD can update, or use a stable tag like :main
-        image: ghcr.io/ucanbaklava/api:latest # Placeholder or stable tag
+        image: ghcr.io/ucanbaklava-cicd/api # Placeholder or stable tag
         ports:
         - containerPort: 8080 # Must match ASPNETCORE_URLS and Dockerfile EXPOSE
         # Add environment variables, secrets, configmaps if needed
